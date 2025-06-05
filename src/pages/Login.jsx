@@ -17,6 +17,7 @@ const Login = () => {
       await login(phone, password);
       navigate('/');
     } catch (err) {
+      console.error(err);
       setError('Login failed. Please check your credentials.');
     }
   };

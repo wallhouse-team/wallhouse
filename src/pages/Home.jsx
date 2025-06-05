@@ -1,16 +1,13 @@
 import { useAuth } from '../context/AuthContext';
+import AdminPage from './AdminPage';
+import UserPage from './UserPage';
 
 const Home = () => {
-  const { logout } = useAuth();
-
-  const handleLogout = () => {
-    logout();
-  };
+  const { user } = useAuth();
 
   return (
-    <section>
-      <h1>Welcome to Wallhouse</h1>
-      <button onClick={handleLogout}>Logout</button>
+    <section className='relative min-h-screen flex items-center justify-center px-4'>
+      {user.role === 'admin' ? <AdminPage /> : <UserPage />}
     </section>
   );
 };
