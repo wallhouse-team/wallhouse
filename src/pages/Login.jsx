@@ -1,26 +1,43 @@
-import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
-  const { login } = useAuth();
+  const { login, user } = useAuth();
   const navigate = useNavigate();
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
+  // const { pathname } = useLocation();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await login(phone, password);
-      navigate('/');
     } catch (err) {
       console.error(err);
       setError('Login failed. Please check your credentials.');
     }
   };
+
+  useEffect(() => {
+    if (user && user.role === 'admin') {
+      navigate('/admin');
+    } else {
+      navigate('/user');
+    }
+  }, [navigate, user]);
+
+  // if (isLoggedIn && pathname === '/login') {
+  //   if (user.role === 'admin') {
+  //     navigate('/admin');
+  //   } else {
+  //     navigate('/user');
+  //   }
+  // }
 
   return (
     <div

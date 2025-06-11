@@ -1,27 +1,28 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 
 const UserPage = () => {
+  const location = useLocation();
+  const isRootUserPage = location.pathname === '/user';
+
   return (
     <>
-      <div
-        className="absolute inset-0 bg-cover bg-black/60 bg-center blur-sm z-0"
-        style={{
-          backgroundImage:
-            "url('https://walldesign-tests-jgda.vercel.app/assets/bg-sklad-BclbMkb4.png')",
-          zIndex: -1,
-        }}
-      ></div>
+      <div className='relative bg-black/60 p-8 rounded-xl text-white text-center'>
+        {isRootUserPage && (
+          <h1 className='text-3xl font-bold mb-4'>Welcome to User Page</h1>
+        )}
 
-      <div className="relative bg-black/60 p-8 rounded-xl text-white text-center">
-        <h1 className="text-3xl font-bold mb-4">Welcome to Userpage</h1>
+        <div className='mb-4'>
+          <Link to='/user/vitrinalar' className='text-blue-400 underline mx-2'>
+            Vitrinalar
+          </Link>
 
-        <Link
-          to="/goods"
-          className="inline-block mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition"
-        >
-          Перейти к складу
-        </Link>
+          <Link to='/user/goods' className='text-blue-400 underline mx-2'>
+            Goods
+          </Link>
+        </div>
+
+        <Outlet />
       </div>
     </>
   );
