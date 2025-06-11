@@ -4,8 +4,10 @@ import axios from "axios";
 export default function GoodsTable() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   const warehouseId = "4905a54b-bfa3-42bd-8e82-6a9373058c0b";
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -13,6 +15,9 @@ export default function GoodsTable() {
         const response = await axios.get(
           "https://testwalldesign.limsa.uz/warehouse-products/all-products",
           {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
             params: {
               page: 1,
               limit: 100,
@@ -20,9 +25,17 @@ export default function GoodsTable() {
             },
           }
         );
-        setProducts(response.data.data);
+
+        const items = response.data?.data?.data;
+
+        if (Array.isArray(items)) {
+          setProducts(items);
+        } else {
+          setError(true);
+        }
       } catch (error) {
         console.error("Ошибка при загрузке:", error);
+        setError(true);
       } finally {
         setLoading(false);
       }
@@ -33,6 +46,10 @@ export default function GoodsTable() {
 
   if (loading) {
     return <div className="text-white p-4">Загрузка...</div>;
+  }
+
+  if (error) {
+    return <div className="text-red-500 p-4">Ошибка при загрузке данных</div>;
   }
 
   return (
@@ -65,20 +82,20 @@ export default function GoodsTable() {
                 {item.article}
               </td>
               <td className="px-4 py-2 border border-slate-700 text-center">
-                {item.batch}
+                {item.batch_number}
               </td>
               <td className="px-4 py-2 border border-slate-700 text-center">
-                {item.rolls}
+                {item.quantity}
               </td>
               <td className="px-4 py-2 border border-slate-700 text-center">
-                {item.showcase}
+                {item.shop_product_item}
               </td>
               <td className="px-4 py-2 border border-slate-700 text-center">
                 {item.price}
               </td>
               <td className="px-4 py-2 border border-slate-700 text-center">
                 <img
-                  src={item.image}
+                  src={item.image_url}
                   alt="Товар"
                   className="w-16 h-16 object-cover mx-auto rounded"
                 />
