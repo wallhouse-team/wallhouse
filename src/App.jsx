@@ -4,8 +4,10 @@ import AdminPage from "./pages/AdminPage";
 import UserPage from "./pages/UserPage";
 import Login from "./pages/Login";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import GoodsShowcase from "./pages/GoodsShowcase";
 import Layout from "./layouts/MainLayout";
 import Goods from "./pages/Goods";
+import SendToShowcase from "./pages/SendToShowcase";
 import { ToastContainer } from "react-toastify";
 import "./index.css";
 
@@ -46,6 +48,22 @@ function App() {
             element={
               <ProtectedRoute>
                 <Goods />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="goodsshowcase"
+            element={
+              <ProtectedRoute>
+                <GoodsShowcase />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="sendtoshowcase"
+            element={
+              <ProtectedRoute>
+                <SendToShowcase />
               </ProtectedRoute>
             }
           />

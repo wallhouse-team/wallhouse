@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 const UserPage = () => {
@@ -20,7 +19,13 @@ const UserPage = () => {
           to="/goods"
           className="inline-block mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition"
         >
-          Перейти к складу
+          Tovarlar
+        </Link>
+        <Link
+          to="/goodsshowcase"
+          className="inline-block mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition"
+        >
+          Tovarlarni vitrinaga junatish
         </Link>
       </div>
     </>
