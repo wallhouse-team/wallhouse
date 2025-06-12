@@ -1,6 +1,7 @@
-import Navbar from '../components/Navbar';
-import { Outlet } from 'react-router-dom';
+import Navbar from "../components/Navbar";
+import { Outlet } from "react-router-dom";
 
+<<<<<<< HEAD
 const MainLayout = () => {
   return (
     <div className='min-h-screen flex flex-col'>
@@ -23,5 +24,15 @@ const MainLayout = () => {
     </div>
   );
 };
+=======
+const MainLayout = () => (
+  <>
+    <Navbar />
+    <main className="pt-[105px] min-h-screen">
+      <Outlet />
+    </main>
+  </>
+);
+>>>>>>> 9b7b23afe624b4c3910ba07289579f73d98958e6
 
 export default MainLayout;

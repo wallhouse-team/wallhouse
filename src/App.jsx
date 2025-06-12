@@ -1,36 +1,58 @@
-import { Route, Routes } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import './index.css';
-import Layout from './layouts/MainLayout';
-import AdminPage from './pages/AdminPage';
-import Login from './pages/Login';
-import UserPage from './pages/UserPage';
-import Vitrinalar from './pages/Vitrinalar';
-import ProtectedRoute from './routes/ProtectedRoute';
-import Goods from './pages/Goods';
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import AdminPage from "./pages/AdminPage";
+import UserPage from "./pages/UserPage";
+import Login from "./pages/Login";
+import ProtectedRoute from "./routes/ProtectedRoute";
+import Layout from "./layouts/MainLayout";
+import Goods from "./pages/Goods";
+import { ToastContainer } from "react-toastify";
+import "./index.css";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path='/login' element={<Login />} />
+        <Route path="/login" element={<Login />} />
 
         <Route
-          path='/'
+          path="/"
           element={
             <ProtectedRoute>
               <Layout />
             </ProtectedRoute>
           }
         >
-          <Route path='admin' element={<AdminPage />} />
-          <Route path='user' element={<UserPage />} />
-          <Route path='user/vitrinalar' element={<Vitrinalar />} />
-          <Route path='user/goods' element={<Goods />} />
+          <Route index element={<Home />} />
+
+          <Route
+            path="admin"
+            element={
+              <ProtectedRoute role="admin">
+                <AdminPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="user"
+            element={
+              <ProtectedRoute role="user">
+                <UserPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="goods"
+            element={
+              <ProtectedRoute>
+                <Goods />
+              </ProtectedRoute>
+            }
+          />
         </Route>
       </Routes>
 
-      <ToastContainer position='top-right' autoClose={3000} />
+      <ToastContainer position="top-right" autoClose={3000} />
     </>
   );
 }

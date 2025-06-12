@@ -75,7 +75,6 @@ const Goods = () => {
       ></div>
 
       <div className="relative container mx-auto flex gap-5 flex-col p-8 rounded-xl text-white text-center">
-        {/* Заголовок и поиск */}
         <div className="flex items-center justify-between bg-white/10 rounded-xl p-4 hover:bg-white/30 transition-all duration-300 ease-in">
           <div className="flex items-center gap-5">
             <Inbox size={40} />
@@ -84,13 +83,11 @@ const Goods = () => {
           <SearchInput />
         </div>
 
-        {/* Общая информация */}
         <div className="flex items-center justify-between p-4 bg-[#1E2939] rounded-md text-xl font-semibold">
           <p>Жами нарх: {totalInfo.total_price}</p>
           <p>Жами миқдор: {totalInfo.total_quantity}</p>
         </div>
 
-        {/* Кнопка Excel */}
         <div className="flex justify-end">
           <button className="flex items-center gap-3 bg-[#00A63E] px-3 py-2 rounded-md cursor-pointer hover:bg-green-700 transition">
             <File />
@@ -98,7 +95,6 @@ const Goods = () => {
           </button>
         </div>
 
-        {/* Таблица */}
         <GoodsTable products={products} />
       </div>
     </div>
