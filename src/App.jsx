@@ -10,7 +10,7 @@ import Goods from "./pages/Goods";
 import SendToShowcase from "./pages/SendToShowcase";
 import { ToastContainer } from "react-toastify";
 import "./index.css";
-
+//ы
 function App() {
   return (
     <>
