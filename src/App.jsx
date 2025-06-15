@@ -8,6 +8,8 @@ import UserPage from './pages/UserPage';
 import Vitrinalar from './pages/Vitrinalar';
 import ProtectedRoute from './routes/ProtectedRoute';
 import Goods from './pages/Goods';
+import GoodsShowcase from './pages/GoodsShowcase';
+import SendToShowcase from './pages/SendToShowcase';
 
 function App() {
   return (
@@ -27,6 +29,11 @@ function App() {
           <Route path='user' element={<UserPage />} />
           <Route path='user/vitrinalar' element={<Vitrinalar />} />
           <Route path='user/goods' element={<Goods />} />
+          <Route path='user/goodstoshowcase' element={<GoodsShowcase />} />
+          <Route
+            path='user/goodstoshowcase/sendtoshow'
+            element={<SendToShowcase />}
+          />
         </Route>
       </Routes>
 

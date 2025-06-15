@@ -18,7 +18,13 @@ const UserPage = () => {
           </Link>
 
           <Link to='/user/goods' className='text-blue-400 underline mx-2'>
-            Goods
+            Tovarlar
+          </Link>
+          <Link
+            to='/user/goodstoshowcase'
+            className='text-blue-400 underline mx-2'
+          >
+            Tovarlarni vitrinaga jo'natish
           </Link>
         </div>
 

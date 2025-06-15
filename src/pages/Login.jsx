@@ -24,10 +24,12 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (user && user.role === 'admin') {
-      navigate('/admin');
-    } else {
-      navigate('/user');
+    if (user) {
+      if (user.role === 'admin') {
+        navigate('/admin');
+      } else {
+        navigate('/user');
+      }
     }
   }, [navigate, user]);
 

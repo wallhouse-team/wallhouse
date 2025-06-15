@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { loginAdmin } from '../services/WarehouseApi';
+import { loginAdmin } from '../services/warehouseApi';
 
 const AuthContext = createContext();
 
@@ -72,8 +72,6 @@ export const AuthProvider = ({ children }) => {
       throw error;
     }
   };
-
-  console.log(user);
 
   const logout = () => {
     setUser(null);

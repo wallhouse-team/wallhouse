@@ -1,19 +1,20 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-const ProtectedRoute = ({ children, role }) => {
-  const { isLoggedIn, user } = useAuth();
+const ProtectedRoute = ({ children }) => {
+  const { isLoggedIn } = useAuth();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  console.log(pathname);
 
-  if (!isLoggedIn) {
-    return <Navigate to='/login' />;
-  }
+  useEffect(() => {
+    if (pathname !== '/login' && !isLoggedIn) {
+      navigate('/login');
+    }
+  }, [isLoggedIn, navigate, pathname]);
 
-  // If a specific role is required and user doesn't match
-  if (role && user?.role !== role) {
-    return <Navigate to='/' />;
-  }
-
-  return children || <Outlet />;
+  return <>{children}</>;
 };
 
 export default ProtectedRoute;
