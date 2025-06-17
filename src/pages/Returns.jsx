@@ -79,7 +79,7 @@ export default function Returns() {
                     </div>
                 </div>
 
-                <ReturnTable products={products} />
+                <ReturnTable shops={shops} />
             </div>
         </div>
     );

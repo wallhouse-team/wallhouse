@@ -6,35 +6,34 @@ export default function ReturnTable() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
-    const warehouseId = "4905a54b-bfa3-42bd-8e82-6a9373058c0b";
+    const shopId = "23c2ed9c-1b02-4e99-9773-e3de9668e15d";
     const token = localStorage.getItem("token");
 
     useEffect(() => {
         const fetchProducts = async () => {
+            if (!token) return;
+
             try {
                 const response = await axios.get(
-                    "https://testwalldesign.limsa.uz/order/shop",
+                    `https://testwalldesign.limsa.uz/order/shop/${shopId}`,
                     {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                        params: {
-                            page: 1,
-                            limit: 100,
-                            warehouseId,
-                        },
+                        headers: { Authorization: `Bearer ${token}` },
+                        params: { page: 1, limit: 100 },
                     }
                 );
 
-                const items = response.data?.data?.data;
+                console.log("API response:", response.data);
 
+                const items = response.data?.data; // Burayı response'a göre düzelt
                 if (Array.isArray(items)) {
                     setProducts(items);
+                    setError(false);
                 } else {
+                    console.warn("Data dizi değil:", items);
                     setError(true);
                 }
             } catch (error) {
-                console.error("Ошибка при загрузке:", error);
+                console.error("API hatası:", error.response?.data || error.message);
                 setError(true);
             } finally {
                 setLoading(false);
@@ -42,18 +41,20 @@ export default function ReturnTable() {
         };
 
         fetchProducts();
-    }, []);
+    }, [token]);
+
 
     if (loading) {
-        return <div className="text-white p-4">Загрузка...</div>;
+        return <div className="text-white p-4">Yuklanmoqda...</div>;
     }
 
     if (error) {
-        return <div className="text-red-500 p-4">Ошибка при загрузке данных</div>;
+        return <div className="text-red-500 p-4">Hatolik yuz berdi</div>;
     }
 
     return (
         <div className="overflow-x-auto rounded-lg">
+
             <table className="min-w-full table-auto border-collapse bg-slate-800 text-white">
                 <thead>
                     <tr className="bg-slate-700">
