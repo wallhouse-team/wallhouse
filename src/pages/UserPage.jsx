@@ -26,6 +26,13 @@ const UserPage = () => {
           >
             Tovarlarni vitrinaga jo'natish
           </Link>
+
+          <Link
+            to='/user/goodsreturn'
+            className='text-blue-400 underline mx-2'
+          >
+            Mahsulot qaytarish
+          </Link>
         </div>
 
         <Outlet />

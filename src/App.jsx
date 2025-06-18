@@ -10,6 +10,8 @@ import ProtectedRoute from './routes/ProtectedRoute';
 import Goods from './pages/Goods';
 import GoodsShowcase from './pages/GoodsShowcase';
 import SendToShowcase from './pages/SendToShowcase';
+import GoodsReturn from './pages/GoodsReturn';
+import Returns from './pages/Returns';
 
 function App() {
   return (
@@ -33,6 +35,11 @@ function App() {
           <Route
             path='user/goodstoshowcase/sendtoshow'
             element={<SendToShowcase />}
+          />
+          <Route path='user/goodsreturn' element={<GoodsReturn />} />
+          <Route
+            path='user/goodsreturn/return'
+            element={<Returns />}
           />
         </Route>
       </Routes>

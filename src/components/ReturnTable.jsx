@@ -1,0 +1,102 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+export default function ReturnTable() {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+
+    const shopId = "23c2ed9c-1b02-4e99-9773-e3de9668e15d";
+    const token = localStorage.getItem("token");
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            if (!token) return;
+
+            try {
+                const response = await axios.get(
+                    `https://testwalldesign.limsa.uz/order/shop/${shopId}`,
+                    {
+                        headers: { Authorization: `Bearer ${token}` },
+                        params: { page: 1, limit: 100 },
+                    }
+                );
+
+                console.log("API response:", response.data);
+
+                const items = response.data?.data; // Burayı response'a göre düzelt
+                if (Array.isArray(items)) {
+                    setProducts(items);
+                    setError(false);
+                } else {
+                    console.warn("Data dizi değil:", items);
+                    setError(true);
+                }
+            } catch (error) {
+                console.error("API hatası:", error.response?.data || error.message);
+                setError(true);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProducts();
+    }, [token]);
+
+
+    if (loading) {
+        return <div className="text-white p-4">Yuklanmoqda...</div>;
+    }
+
+    if (error) {
+        return <div className="text-red-500 p-4">Hatolik yuz berdi</div>;
+    }
+
+    return (
+        <div className="overflow-x-auto rounded-lg">
+
+            <table className="min-w-full table-auto border-collapse bg-slate-800 text-white">
+                <thead>
+                    <tr className="bg-slate-700">
+                        <th className="px-4 py-2 border border-slate-600 rounded-tl-lg">№</th>
+                        <th className="px-4 py-2 border border-slate-600">Magazin</th>
+                        <th className="px-4 py-2 border border-slate-600">Umumiy tushum $</th>
+                        <th className="px-4 py-2 border border-slate-600">Sana</th>
+                        <th className="px-4 py-2 border border-slate-600">Harakatlar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {products.map((item, index) => (
+                        <tr key={item.id} className="hover:bg-slate-600 transition">
+                            <td className="px-4 py-2 border border-slate-700 text-center">
+                                {index + 1}
+                            </td>
+                            <td className="px-4 py-2 border border-slate-700 text-center">
+                                {item.article}
+                            </td>
+                            <td className="px-4 py-2 border border-slate-700 text-center">
+                                {item.batch_number}
+                            </td>
+                            <td className="px-4 py-2 border border-slate-700 text-center">
+                                {item.quantity}
+                            </td>
+                            <td className="px-4 py-2 border border-slate-700 text-center">
+                                {item.shop_product_item}
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+
+            <div className="flex justify-center items-center gap-2 p-4">
+                <button className="px-2 py-1 rounded bg-slate-700 hover:bg-slate-600">
+                    {"<"}
+                </button>
+                <span className="px-3 py-1 rounded bg-blue-600">1</span>
+                <button className="px-2 py-1 rounded bg-slate-700 hover:bg-slate-600">
+                    {">"}
+                </button>
+            </div>
+        </div>
+    );
+}
