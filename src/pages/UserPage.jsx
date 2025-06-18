@@ -33,6 +33,20 @@ const UserPage = () => {
           >
             Mahsulot qaytarish
           </Link>
+
+          <Link
+            to='/user/orderproduct'
+            className='text-blue-400 underline mx-2'
+          >
+            Mahsulot zakaz qilish
+          </Link>
+
+          <Link
+            to='/user/reports'
+            className='text-blue-400 underline mx-2'
+          >
+            Hisobotlar omborlarniki
+          </Link>
         </div>
 
         <Outlet />

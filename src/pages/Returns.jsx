@@ -9,7 +9,7 @@ export default function Returns() {
     const [shops, setShops] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-    const [selectedDate, setSelectedDate] = useState(null); // 📅
+    const [selectedDate, setSelectedDate] = useState(null);
 
     const warehouseId = "4905a54b-bfa3-42bd-8e82-6a9373058c0b";
     const token = localStorage.getItem("token");
@@ -32,10 +32,10 @@ export default function Returns() {
                 if (Array.isArray(res)) {
                     setShops(res);
                 } else {
-                    console.warn("Данные магазинов не массив.");
+                    setError(true);
                 }
             } catch (err) {
-                console.error("Ошибка при загрузке:", err);
+                console.error("Error while loading data:", err);
                 setError(true);
             } finally {
                 setLoading(false);
@@ -65,7 +65,7 @@ export default function Returns() {
                             </h3>
                         </div>
 
-                        {/* 📅 Kalendar uchun */}
+                        {/* 📅 Date Picker */}
                         <div className="flex items-center gap-2 bg-white/20 px-4 py-2 rounded-md">
                             <CalendarDays size={20} />
                             <DatePicker

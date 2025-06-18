@@ -12,6 +12,8 @@ import GoodsShowcase from './pages/GoodsShowcase';
 import SendToShowcase from './pages/SendToShowcase';
 import GoodsReturn from './pages/GoodsReturn';
 import Returns from './pages/Returns';
+import OrderProduct from './pages/OrderProduct';
+import Reports from './pages/Reports';
 
 function App() {
   return (
@@ -41,6 +43,8 @@ function App() {
             path='user/goodsreturn/return'
             element={<Returns />}
           />
+          <Route path='user/orderproduct' element={<OrderProduct />} />
+          <Route path='user/reports' element={<Reports />} />
         </Route>
       </Routes>
 
